@@ -1,0 +1,38 @@
+{
+	"name": "webext-sandbox",
+	"version": "0.0.0",
+	"manifest_version": 2,
+	"permissions": [
+		"webNavigation",
+		"https://ephiframe.vercel.app/*",
+		"https://extra-ephiframe.vercel.app/*",
+		"https://alt-ephiframe.vercel.app/*"
+	],
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"content_scripts": [
+		{
+			"all_frames": true,
+			"matches": ["https://ephiframe.vercel.app/*"],
+			"js": ["static.js"],
+			"css": ["static.css"]
+		},
+		{
+			"all_frames": true,
+			"matches": ["https://extra-ephiframe.vercel.app/*"],
+			"js": ["static.js"],
+			"css": ["static.css"]
+		},
+		{
+			"all_frames": true,
+			"matches": ["https://alt-ephiframe.vercel.app/*"],
+			"exclude_matches": [
+				"https://alt-ephiframe.vercel.app/Parent-page*"
+			],
+			"js": ["static.js"],
+			"css": ["static.css"]
+		}
+	],
+	"web_accessible_resources": ["*.js", "*.css"]
+}
